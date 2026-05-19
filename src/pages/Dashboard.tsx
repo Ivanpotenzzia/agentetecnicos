@@ -33,7 +33,7 @@ export default function Dashboard() {
 
       {/* KPIs globales */}
       {global && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           <KPICard
             label="Total llamadas"
             value={fmt(global.total_llamadas)}
@@ -53,6 +53,11 @@ export default function Dashboard() {
           <KPICard
             label="No contesta"
             value={fmt(global.no_contesta)}
+            color="gray"
+          />
+          <KPICard
+            label="Rec. proveedor"
+            value={fmt(global.rechazo_proveedor)}
             color="gray"
           />
           <KPICard

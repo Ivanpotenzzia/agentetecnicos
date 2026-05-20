@@ -1,7 +1,9 @@
 import type { Filters } from '../types'
+import { TODOS_RESULTADOS } from '../types'
 
-const PROVINCES = ['CORDOBA', 'GERONA', 'GRANADA', 'MALAGA', 'SEVILLA', 'VALENCIA']
-const RESULTS   = ['Interesado', 'No interesado', 'No contesta', 'Número erróneo', 'Llamar más tarde']
+// Provincias actualmente activas en producción.
+// Si se añaden más en n8n (workflow alimentador), añadirlas aquí también.
+const PROVINCES = ['GIRONA', 'GRANADA', 'SEVILLA']
 
 interface FilterBarProps {
   filters: Filters
@@ -46,7 +48,7 @@ export default function FilterBar({ filters, onChange, onReset }: FilterBarProps
           className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
         >
           <option value="">Todos</option>
-          {RESULTS.map(r => <option key={r} value={r}>{r}</option>)}
+          {TODOS_RESULTADOS.map(r => <option key={r} value={r}>{r}</option>)}
         </select>
       </div>
 

@@ -2,12 +2,19 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recha
 import type { MetricsGlobal } from '../types'
 
 const COLORS: Record<string, string> = {
-  'Interesado':        '#22c55e',
-  'No interesado':     '#ef4444',
-  'No contesta':       '#9ca3af',
-  'Número erróneo':    '#f97316',
-  'Rechazo proveedor': '#a855f7',
-  'Llamar más tarde':  '#eab308',
+  // Conectada
+  'Interesado':         '#22c55e',
+  'No interesado':      '#ef4444',
+  'No autónomo':        '#ec4899',
+  'Llamar más tarde':   '#eab308',
+  'Sin clasificar':     '#3b82f6',
+  // No conectada
+  'No contesta':        '#9ca3af',
+  'Ocupado':            '#f59e0b',
+  'Buzón de voz':       '#6366f1',
+  'Número erróneo':     '#f97316',
+  'Rechazo proveedor':  '#a855f7',
+  'Error técnico':      '#475569',
 }
 
 interface Props {
@@ -16,12 +23,17 @@ interface Props {
 
 export default function ResultsPieChart({ data }: Props) {
   const entries = [
-    { name: 'Interesado',        value: data.interesados },
-    { name: 'No interesado',     value: data.no_interesados },
-    { name: 'No contesta',       value: data.no_contesta },
-    { name: 'Número erróneo',    value: data.numero_erroneo },
-    { name: 'Rechazo proveedor', value: data.rechazo_proveedor },
-    { name: 'Llamar más tarde',  value: data.llamar_mas_tarde },
+    { name: 'Interesado',         value: data.interesados },
+    { name: 'No interesado',      value: data.no_interesados },
+    { name: 'No autónomo',        value: data.no_autonomo },
+    { name: 'Llamar más tarde',   value: data.llamar_mas_tarde },
+    { name: 'Sin clasificar',     value: data.sin_clasificar },
+    { name: 'No contesta',        value: data.no_contesta },
+    { name: 'Ocupado',            value: data.ocupado },
+    { name: 'Buzón de voz',       value: data.buzon_voz },
+    { name: 'Número erróneo',     value: data.numero_erroneo },
+    { name: 'Rechazo proveedor',  value: data.rechazo_proveedor },
+    { name: 'Error técnico',      value: data.error_tecnico },
   ].filter(e => e.value > 0)
 
   return (

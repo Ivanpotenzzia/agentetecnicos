@@ -4,11 +4,19 @@
 -- RESULTADO = 11 valores unificados con el agente de Retell)
 --
 -- EJECUTAR en Supabase Studio → SQL Editor del proyecto Juanfran.
--- Es seguro re-ejecutarlas (CREATE OR REPLACE).
+-- Es seguro re-ejecutarlas (DROP + CREATE).
+--
+-- NOTA: usamos DROP en lugar de CREATE OR REPLACE porque cambian los
+-- tipos de columna (de bigint a int por el cast ::int) y PostgreSQL
+-- no permite eso con REPLACE. DROP de una vista solo borra la query
+-- guardada, no toca los datos de la tabla calls.
 -- ============================================================
 
+DROP VIEW IF EXISTS v_metrics_global;
+DROP VIEW IF EXISTS v_metrics_by_province;
+
 -- --- Métricas globales --------------------------------------
-CREATE OR REPLACE VIEW v_metrics_global AS
+CREATE VIEW v_metrics_global AS
 SELECT
   COUNT(*)::int                                                                       AS total_llamadas,
 
@@ -59,7 +67,7 @@ FROM calls;
 
 
 -- --- Métricas por provincia ---------------------------------
-CREATE OR REPLACE VIEW v_metrics_by_province AS
+CREATE VIEW v_metrics_by_province AS
 SELECT
   provincia,
   COUNT(*)::int                                                                       AS total_llamadas,

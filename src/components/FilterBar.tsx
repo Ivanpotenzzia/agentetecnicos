@@ -3,7 +3,7 @@ import { TODOS_RESULTADOS } from '../types'
 
 // Provincias actualmente activas en producción.
 // Si se añaden más en n8n (workflow alimentador), añadirlas aquí también.
-const PROVINCES = ['GIRONA', 'GRANADA', 'SEVILLA']
+const PROVINCES = ['CORDOBA', 'GIRONA', 'GRANADA', 'MALAGA', 'SEVILLA', 'VALENCIA']
 
 interface FilterBarProps {
   filters: Filters

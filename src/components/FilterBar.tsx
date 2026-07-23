@@ -1,9 +1,6 @@
 import type { Filters } from '../types'
 import { TODOS_RESULTADOS } from '../types'
-
-// Provincias actualmente activas en producción.
-// Si se añaden más en n8n (workflow alimentador), añadirlas aquí también.
-const PROVINCES = ['CORDOBA', 'GIRONA', 'GRANADA', 'MALAGA', 'SEVILLA', 'VALENCIA']
+import { useProvinces } from '../hooks/useCalls'
 
 interface FilterBarProps {
   filters: Filters
@@ -12,6 +9,9 @@ interface FilterBarProps {
 }
 
 export default function FilterBar({ filters, onChange, onReset }: FilterBarProps) {
+  // Todas las provincias con llamadas registradas (históricas + activas).
+  const provinces = useProvinces()
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-4 flex flex-wrap gap-3 items-end">
       {/* Búsqueda */}
@@ -35,7 +35,7 @@ export default function FilterBar({ filters, onChange, onReset }: FilterBarProps
           className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
         >
           <option value="">Todas</option>
-          {PROVINCES.map(p => <option key={p} value={p}>{p}</option>)}
+          {provinces.map(p => <option key={p} value={p}>{p}</option>)}
         </select>
       </div>
 

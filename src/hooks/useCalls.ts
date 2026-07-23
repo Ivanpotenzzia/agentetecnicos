@@ -64,6 +64,28 @@ export function useMetricsByProvince() {
   return { data, loading }
 }
 
+// Provincias con llamadas registradas, para poblar el filtro dinámicamente.
+// Se leen de la vista agregada (1 fila por provincia) para que el desplegable
+// muestre SIEMPRE todas las provincias con datos, sin lista hardcodeada.
+export function useProvinces() {
+  const [provinces, setProvinces] = useState<string[]>([])
+
+  useEffect(() => {
+    supabase
+      .from('v_metrics_by_province')
+      .select('provincia')
+      .then(({ data: rows }) => {
+        const list = (rows ?? [])
+          .map((r: { provincia: string }) => r.provincia)
+          .filter(Boolean)
+          .sort((a: string, b: string) => a.localeCompare(b, 'es'))
+        setProvinces(Array.from(new Set(list)))
+      })
+  }, [])
+
+  return provinces
+}
+
 export function useMetricsGlobal() {
   const [data, setData]     = useState<MetricsGlobal | null>(null)
   const [loading, setLoading] = useState(true)
